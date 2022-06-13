@@ -7,7 +7,7 @@ import java.util.Stack;
 
 public class L3BonusTagParser {
     private static Scanner scanner = new Scanner(System.in);
-    private static ArrayList<String> parsedContents = new ArrayList<String>();
+    private static ArrayList<String> parsedContents = new ArrayList<>();
 
     public static void parseLine(String s) {
         String currentTag;
@@ -29,7 +29,14 @@ public class L3BonusTagParser {
     }
 
     public static String getTagName(String tag) {
-        String tagName = tag.substring(1, tag.length()-1);
+        String tagName;
+        if (isOpeningTag(tag)) {
+            tagName = tag.substring(1, tag.length()-1);
+        } else if (isClosingTag(tag)) {
+            tagName = tag.substring(2, tag.length()-1);
+        } else {
+            return null;
+        }
         return tagName;
     }
 
@@ -47,6 +54,13 @@ public class L3BonusTagParser {
         return false;
     }
 
+    public static boolean isOpeningTag(String tag) {
+        if (isTag(tag) && !isClosingTag(tag)) {
+            return true;
+        }
+        return false;
+    }
+
     public static boolean isClosingTag(String tag) {
         if (isTag(tag) && getTagName(tag).startsWith("/")) {
             return true;
@@ -54,28 +68,44 @@ public class L3BonusTagParser {
         return false;
     }
 
-    public static ArrayList<String> extractContent(String s, Stack<String> openTagsStack) {
-        // if string s is empty, return empty arraylist
+    public static boolean checkValidOpenCloseTags(String openTag, String closeTag) {
+        return getTagName(openTag) == getTagName(closeTag);
+    }
+
+    public static String extractContent(String s, String openTag, String closeTag) {
+        int openIndex = s.indexOf(openTag);
+        int closeIndex = s.indexOf(closeTag);
+        String content = s.substring(openIndex + openTag.length(), closeIndex);
+        return content;
+    }
+
+    public static String recursiveParse(String s, Stack<String> openTagsStack) {
+
+        // if string s is empty, return null
+        if (s.isEmpty()) {
+            return null;
+        }
 
         // get next tag
+        String nextTag = getNextTag(s, 0);
+        if (isOpeningTag(nextTag)) {
+            // push to stack
+            openTagsStack.push(nextTag);
 
-        // if is opening tag, push to stack, recurse with substring from end of opening tag
-
-        // if is closing tag, if yes, check if top of opentagstack contains valid open tag
-
-
-
-
-
-        String originalString = s;
-        String currentString = s;
-        String currOpenTag = getNextTag(currentString, 0);
-        openTagsStack.push(currOpenTag);
-
-        // recursive call on substring
-        ArrayList<String> contents = extractContent("", openTagsStack);
-        parsedContents.addAll(contents);
-
+            // recurse with substring from end of opening tag
+            String subString = s.substring(nextTag.length());
+            String extractedContent = recursiveParse(subString, openTagsStack);
+            parsedContents.add(extractedContent);
+        }
+        else if (isClosingTag(nextTag)) {
+            if (checkValidOpenCloseTags(openTagsStack.peek(), nextTag)) {
+                // extract content
+                String content = extractContent(s, openTagsStack.peek(), nextTag);
+                return content;
+            } else {
+                // invalid pair
+            }
+        }
         return null;
     }
 
