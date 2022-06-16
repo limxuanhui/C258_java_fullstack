@@ -5,9 +5,9 @@ class Student {
     private String name;
     private int id;
 
-    public Student(String name, int id) {
-        this.name = name;
+    public Student(int id, String name) {
         this.id = id;
+        this.name = name;
     }
 
     public String getName() {
@@ -36,21 +36,20 @@ class Student {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Student student = (Student) o;
-        return this.id == student.getId() && this.name == student.getName();
+        System.out.println("Student " + this.getId() + " equals called");
+        return this.getId() == ((Student)o).getId() && this.getName() == ((Student)o).getName();
     }
 
     @Override
     public int hashCode() {
+        System.out.println("Student " + this.getId() + " hashCode called");
         int nameHash = 1;
         for (int i = 0; i < this.getName().length(); i++) {
             nameHash *= this.getName().charAt(i);
         }
-        return this.getId() * nameHash;
-    }
 
+        return this.getId() + nameHash;
+    }
 }
 
 public class L7Q2 {
@@ -60,14 +59,17 @@ public class L7Q2 {
      */
 
     public static void main(String[] args) {
-        Person p1 = new Person(1001, "John");
-        Person p2 = new Person(1001, "John");
-        System.out.println("p1: " + p1);
-        System.out.println("p2: " + p2);
-        System.out.println(p1.hashCode());
-        System.out.println(p2.hashCode());
-        System.out.println(p1.equals(p2));
-        System.out.println(p2.equals(p1));
-        System.out.println(p1 == p2);
+        Student s1 = new Student(1001, "John");
+        Student s2 = new Student(1001, "John");
+//        System.out.println("s1: " + s1);
+//        System.out.println("s2: " + s2);
+//
+        System.out.println(s1.hashCode());
+        System.out.println();
+        System.out.println(s2.hashCode());
+
+//        System.out.println(s1.equals(s2));
+//        System.out.println(s2.equals(s1));
+//        System.out.println(s1 == s2);
     }
 }

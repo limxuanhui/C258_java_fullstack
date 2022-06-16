@@ -1,12 +1,11 @@
-package exercises;
-/* Created by limxuanhui on 13/6/22 */
+package exercises.refactorintoobjects;
+/* Created by limxuanhui on 14/6/22 */
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Factorizer {
-
-    public static ArrayList<Integer> factorize(int num) {
+class Factorizer {
+    public ArrayList<Integer> factorize(int num) {
         ArrayList<Integer> factors = new ArrayList<>();
 
         // check up to half of num as num/2 + 1 will not be a factor
@@ -20,7 +19,7 @@ public class Factorizer {
         return factors;
     }
 
-    public static boolean isPerfectNumber(ArrayList<Integer> factors) {
+    public boolean isPerfectNumber(ArrayList<Integer> factors) {
         int factorsSum = 0;
         for (int i = 0; i < factors.size() - 1; i++) {
             factorsSum += factors.get(i);
@@ -30,7 +29,7 @@ public class Factorizer {
         return factorsSum == factors.get(factors.size()-1);
     }
 
-    public static void analyse(int num) {
+    public void analyse(int num) {
         ArrayList<Integer> factors = factorize(num);
         boolean isPerfectNumber = isPerfectNumber(factors);
 
@@ -46,14 +45,17 @@ public class Factorizer {
         System.out.println(num + " is " + (isPrimeNumber ? "a" : "not a") + " prime number.");
     }
 
-    public static void startFactorize() {
+    public void startFactorize() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("What number would you like to factor?");
         int num = scanner.nextInt();
         analyse(num);
     }
+}
 
+public class FactorizerRefactor {
     public static void main(String[] args) {
-        startFactorize();
+        Factorizer factorizer = new Factorizer();
+        factorizer.startFactorize();
     }
 }

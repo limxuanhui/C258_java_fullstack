@@ -1,8 +1,6 @@
 package L7;
 /* Created by limxuanhui on 14/6/22 */
 
-import java.util.Objects;
-
 class Person {
     private int id;
     private String name;
@@ -36,18 +34,17 @@ class Person {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this.getId() == ((Person)o).getId() && this.getName() == ((Person)o).getName()) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        System.out.println("Person " + this.getId() + " equals called");
+//        return this.getId() == ((Person)o).getId() && this.getName() == ((Person)o).getName();
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        System.out.println("Person " + this.getId() + " hashCode called");
+//        return Objects.hash(id, name);
+//    }
 }
 
 public class L7Q1 {

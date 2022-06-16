@@ -1,14 +1,14 @@
-package exercises;
-/* Created by limxuanhui on 13/6/22 */
+package exercises.refactorintoobjects;
+/* Created by limxuanhui on 14/6/22 */
 
 import java.util.Scanner;
 
-public class InterestCalculator {
+class InterestCalculator {
 
-    public static void generateYearlySummary(int yearNumber, double startAmount, double endAmount) {
-        startAmount = (double) Math.round(startAmount*100.0)/100.0;
-        endAmount = (double) Math.round(endAmount*100.0)/100.0;
-        double interest = (double) Math.round((endAmount - startAmount)*100.0)/100.0;
+    public void generateYearlySummary(int yearNumber, double startAmount, double endAmount) {
+        startAmount = (double) Math.round(startAmount * 100.0) / 100.0;
+        endAmount = (double) Math.round(endAmount * 100.0) / 100.0;
+        double interest = (double) Math.round((endAmount - startAmount) * 100.0) / 100.0;
         System.out.println("Year " + yearNumber);
         System.out.println("Began with $" + startAmount);
         System.out.println("Earned $" + interest);
@@ -16,20 +16,20 @@ public class InterestCalculator {
         System.out.println();
     }
 
-    public static void analyseInvestment(float principalAmount, int numberOfYears, float annualInterestRate, int numberOfCompounding) {
+    public void analyseInvestment(float principalAmount, int numberOfYears, float annualInterestRate, int numberOfCompounding) {
         System.out.println("Calculating...");
 
         double startAmount = principalAmount;
         float periodInterestRate = annualInterestRate / numberOfCompounding;
         for (int i = 1; i <= numberOfYears; i++) {
-            float periodGrowthFactor = (1 + periodInterestRate/100);
-            double endAmount = startAmount*Math.pow(periodGrowthFactor, numberOfCompounding);
+            float periodGrowthFactor = (1 + periodInterestRate / 100);
+            double endAmount = startAmount * Math.pow(periodGrowthFactor, numberOfCompounding);
             generateYearlySummary(i, startAmount, endAmount);
             startAmount = endAmount;
         }
     }
 
-    public static void startInterestCalculator() {
+    public void startInterestCalculator() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("How much do you want to invest?");
         float principalAmount = scanner.nextFloat();
@@ -41,9 +41,11 @@ public class InterestCalculator {
         int numberOfCompounding = scanner.nextInt();
         analyseInvestment(principalAmount, numberOfYears, annualInterestRate, numberOfCompounding);
     }
+}
 
-
+public class InterestCalculatorRefactor {
     public static void main(String[] args) {
-        startInterestCalculator();
+        InterestCalculator interestCalculator = new InterestCalculator();
+        interestCalculator.startInterestCalculator();
     }
 }

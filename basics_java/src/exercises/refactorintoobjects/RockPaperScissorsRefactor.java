@@ -1,16 +1,12 @@
-package assessments.basicprogrammingconcepts;
-/* Created by limxuanhui on 10/6/22 */
+package exercises.refactorintoobjects;
+/* Created by limxuanhui on 14/6/22 */
 
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
-public class RockPaperScissors {
-    /*
-      Write a program that plays the game Rock, Paper, Scissors.
-    */
-
+class RockPaperScissors {
     private static Scanner scanner = new Scanner(System.in);
     private static Random randomNumber = new Random();
     private static final HashMap<Integer, String> ROCK_PAPER_SCISSORS_MAP = new HashMap<Integer, String>() {{
@@ -139,7 +135,7 @@ public class RockPaperScissors {
         System.out.println("3. Scissors");
     }
 
-    public static void main(String[] args) {
+    public void play(){
         do {
             System.out.println("How many rounds do you want to play?");
             int numberOfTimes = promptInteger();
@@ -150,5 +146,12 @@ public class RockPaperScissors {
                 break;
             }
         } while (true);
+    }
+}
+
+public class RockPaperScissorsRefactor {
+    public static void main(String[] args) {
+        RockPaperScissors rps = new RockPaperScissors();
+        rps.play();
     }
 }

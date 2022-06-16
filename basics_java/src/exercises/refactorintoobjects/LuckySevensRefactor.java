@@ -1,10 +1,10 @@
-package exercises;
-/* Created by limxuanhui on 13/6/22 */
+package exercises.refactorintoobjects;
+/* Created by limxuanhui on 14/6/22 */
 
 import java.util.Random;
 import java.util.Scanner;
 
-public class LuckySevens {
+class LuckySevens {
     private static Scanner scanner = new Scanner(System.in);
     private static Random random = new Random();
 
@@ -30,9 +30,16 @@ public class LuckySevens {
         System.out.println("You should have quit after " + rollCountWithMaxHolding + " rolls when you had $" + maxHolding);
     }
 
-    public static void main(String[] args) {
+    public void startLuckySevens() {
         System.out.println("How many dollars do you have?");
         float capital = scanner.nextFloat();
         gamble(capital);
+    }
+}
+
+public class LuckySevensRefactor {
+    public static void main(String[] args) {
+        LuckySevens luckySevens = new LuckySevens();
+        luckySevens.startLuckySevens();
     }
 }
