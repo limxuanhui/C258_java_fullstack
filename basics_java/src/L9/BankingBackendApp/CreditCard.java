@@ -4,7 +4,7 @@ package L9.BankingBackendApp;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class CreditCard implements BankingCard {
+public class CreditCard implements BankingCard, Comparable<CreditCard> {
     private final String TYPE = "CREDIT";
     private final String cardHolderName;
     private final long cardNumber;
@@ -56,8 +56,12 @@ public class CreditCard implements BankingCard {
 
     @Override
     public String toString() {
-        return "CreditCard --- Card holder name: " + cardHolderName + " | Card number: " + cardNumber +
-                " | Creation date: " + creationDate + " | Expiry date: " + expiryDate;
+        String row0 = "| Bank of Joseph Credit Card       |\n";
+        String row1 = "| Card holder name ---     " + cardHolderName + " |\n";
+        String row2 = "| Card number ---     " + cardNumber + " |\n";
+        String row3 = "| Issued date ---      " + creationDate + " |\n";
+        String row4 = "| Expiry date ---      " + expiryDate + " |\n";
+        return  row0 + row1 + row2 + row3 + row4;
     }
 
     @Override
@@ -71,5 +75,16 @@ public class CreditCard implements BankingCard {
     @Override
     public int hashCode() {
         return Objects.hash(cardHolderName, cardNumber);
+    }
+
+    @Override
+    public int compareTo(CreditCard o) {
+        if (this.getCardNumber() >= o.getCardNumber()) {
+            return 1;
+        } else if (this.getCardNumber() < o.getCardNumber()) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }

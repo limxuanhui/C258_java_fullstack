@@ -3,18 +3,16 @@ package L9.BankingBackendApp;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class Bank {
+public class BankOfJoseph {
     private static final String DATABASE_URL = "src/L9/BankingBackendApp/creditcarddatabase.txt";
     private static final Scanner scanner = new Scanner(System.in);
     private final TreeSet<CreditCard> creditCards;
     private final AccountNumberGenerator accountNumberGenerator;
 
-    public Bank() {
+    public BankOfJoseph() {
         this.creditCards = new TreeSet<>();
 
         boolean connectedToDatabase;
@@ -26,7 +24,7 @@ public class Bank {
 
         greet();
         displayCreditCardOptions();
-        int choice = promptInt();
+        int choice = Utility.promptInt();
         while (choice >= 1 && choice <= 6) {
             serve(choice);
             if (choice == 6) break;
@@ -35,7 +33,7 @@ public class Bank {
         }
     }
 
-    public static int promptInt() {
+    public int promptInt() {
         boolean isValidInt = false;
         do {
             try {
@@ -48,8 +46,8 @@ public class Bank {
         } while (!isValidInt);
         return -1;
     }
-
-    public static String promptString(String field) {
+//dont bind user input with classes
+    public String promptString(String field) {
         System.out.println("Enter your " + field);
         String enteredField = scanner.nextLine();
         return enteredField;
@@ -180,16 +178,16 @@ public class Bank {
         }
     }
 
-    private static void greet() {
+    private void greet() {
         System.out.println("Welcome to Bank of Joseph");
         System.out.println("How may I help you?");
     }
 
-    private static void bye() {
+    private void bye() {
         System.out.println("Bank of Joseph looks forward to serving you again!");
     }
 
-    private static void displayCreditCardOptions() {
+    private void displayCreditCardOptions() {
         System.out.println("\t1. Sign up for credit card");
         System.out.println("\t2. Check all my cards");
         System.out.println("\t3. Check card expiry");
