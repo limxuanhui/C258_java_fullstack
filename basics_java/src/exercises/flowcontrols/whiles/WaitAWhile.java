@@ -14,5 +14,11 @@ public class WaitAWhile {
 
         System.out.println("Oh. It's " + timeNow + " o'clock.");
         System.out.println("Guess I should go to bed ...");
+
+        /*
+            Setting bedTime to 11 increases the loop by one more time
+            Setting timeNow to 11 will cause the while loop to not run
+            Commenting out ++ leads to infinite loop
+        */
     }
 }
