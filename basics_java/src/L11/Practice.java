@@ -1,6 +1,10 @@
 package L11;
 /* Created by limxuanhui on 20/6/22 */
 
+interface Human {
+    public void breath();
+}
+
 class Parent {
     public Parent() {
         System.out.println("Parent created");
