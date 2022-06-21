@@ -1,24 +1,24 @@
 package classroster.controller;
 /* Created by limxuanhui on 21/6/22 */
 
+import classroster.ui.ClassRosterView;
 import classroster.ui.UserIO;
 import classroster.ui.UserIOConsoleImpl;
 
 public class ClassRosterController {
+    private ClassRosterView view = new ClassRosterView();
     private UserIO io = new UserIOConsoleImpl();
+
+    private int getMenuSelection() {
+        return view.printMenuAndGetSelection();
+    }
 
     public void run() {
         boolean keepGoing = true;
         int menuSelection = 0;
         while (keepGoing) {
-            io.print("Main Menu");
-            io.print("1. List Student ID");
-            io.print("2. Create New Student");
-            io.print("3. View a Student");
-            io.print("4. Remove a Student");
-            io.print("5. Exit");
+            menuSelection = getMenuSelection();
 
-            menuSelection = io.readInt("Please select from the above choices: ", 1, 5);
             switch (menuSelection) {
                 case 1:
                     io.print("LIST STUDENTS");
