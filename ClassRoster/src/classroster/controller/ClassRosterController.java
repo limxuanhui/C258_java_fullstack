@@ -8,6 +8,8 @@ import classroster.ui.ClassRosterView;
 import classroster.ui.UserIO;
 import classroster.ui.UserIOConsoleImpl;
 
+import java.util.List;
+
 public class ClassRosterController {
     private ClassRosterView view = new ClassRosterView();
     private ClassRosterDao dao = new ClassRosterDaoFileImpl();
@@ -25,10 +27,9 @@ public class ClassRosterController {
 
             switch (menuSelection) {
                 case 1:
-                    io.print("LIST STUDENTS");
+                    listStudents();
                     break;
                 case 2:
-                    io.print("CREATE STUDENT");
                     createStudent();
                     break;
                 case 3:
@@ -52,5 +53,11 @@ public class ClassRosterController {
         Student newStudent = view.getNewStudentInfo();
         dao.addStudent(newStudent.getStudentId(), newStudent);
         view.displayCreateSuccessBanner();
+    }
+
+    private void listStudents() {
+        view.displayDisplayAllBanner();
+        List<Student> studentList = dao.getAllStudents();
+        view.displayStudentList(studentList);
     }
 }
