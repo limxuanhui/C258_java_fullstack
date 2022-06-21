@@ -40,5 +40,11 @@ public class Practice {
 
         Parent cp = new Child();
         cp.sayHello();
+
+        try {
+            System.out.println("1/0");
+        } finally {
+            System.out.println("should cause division by zero error");
+        }
     }
 }
