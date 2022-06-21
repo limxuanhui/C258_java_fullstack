@@ -1,12 +1,16 @@
 package classroster.controller;
 /* Created by limxuanhui on 21/6/22 */
 
+import classroster.dao.ClassRosterDao;
+import classroster.dao.ClassRosterDaoFileImpl;
+import classroster.dto.Student;
 import classroster.ui.ClassRosterView;
 import classroster.ui.UserIO;
 import classroster.ui.UserIOConsoleImpl;
 
 public class ClassRosterController {
     private ClassRosterView view = new ClassRosterView();
+    private ClassRosterDao dao = new ClassRosterDaoFileImpl();
     private UserIO io = new UserIOConsoleImpl();
 
     private int getMenuSelection() {
@@ -25,6 +29,7 @@ public class ClassRosterController {
                     break;
                 case 2:
                     io.print("CREATE STUDENT");
+                    createStudent();
                     break;
                 case 3:
                     io.print("VIEW STUDENT");
@@ -40,5 +45,12 @@ public class ClassRosterController {
             }
         }
         io.print("GOOD BYE");
+    }
+
+    private void createStudent() {
+        view.displayCreateStudentBanner();
+        Student newStudent = view.getNewStudentInfo();
+        dao.addStudent(newStudent.getStudentId(), newStudent);
+        view.displayCreateSuccessBanner();
     }
 }
