@@ -6,7 +6,11 @@ import classroster.dto.Student;
 import java.util.List;
 
 public class ClassRosterView {
-    private UserIO io = new UserIOConsoleImpl();
+    private UserIO io;
+
+    public ClassRosterView(UserIO io) {
+        this.io = io;
+    }
 
     public int printMenuAndGetSelection() {
         io.print("Main Menu");

@@ -2,15 +2,19 @@ package classroster.controller;
 /* Created by limxuanhui on 21/6/22 */
 
 import classroster.dao.ClassRosterDao;
-import classroster.dao.ClassRosterDaoFileImpl;
 import classroster.dto.Student;
 import classroster.ui.ClassRosterView;
 
 import java.util.List;
 
 public class ClassRosterController {
-    private ClassRosterView view = new ClassRosterView();
-    private ClassRosterDao dao = new ClassRosterDaoFileImpl();
+    private ClassRosterDao dao;
+    private ClassRosterView view;
+
+    public ClassRosterController(ClassRosterDao dao, ClassRosterView view) {
+        this.dao = dao;
+        this.view = view;
+    }
 
     public void run() {
         boolean keepGoing = true;
