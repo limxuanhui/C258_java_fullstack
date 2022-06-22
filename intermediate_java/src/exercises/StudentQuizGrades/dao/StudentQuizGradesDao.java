@@ -22,4 +22,10 @@ public interface StudentQuizGradesDao {
     List<Integer> getQuizScores(String name);
 
     Float getAverageQuizScore(String name);
+
+    Float getClassAverageQuizScore();
+
+    List<Student> getHighestScorers();
+
+    List<Student> getLowestScorers();
 }

@@ -16,7 +16,7 @@ public class StudentQuizGradesView {
 
     public int printMenuAndGetMenuSelection() {
         displayMenu();
-        return io.readInt("Choose an option from above: ", 1, 6);
+        return io.readInt("Choose an option from above: ", 1, 9);
     }
 
     public void displayMenu() {
@@ -26,7 +26,10 @@ public class StudentQuizGradesView {
         io.print("3. Remove a student");
         io.print("4. View the list of quiz scores of a given student");
         io.print("5. View the average quiz score of a given student");
-        io.print("6. Exit");
+        io.print("6. Average quiz score of all student");
+        io.print("7. View highest quiz scorer(s)");
+        io.print("8. View lowest quiz scorer(s)");
+        io.print("9. Exit");
     }
 
     public void displayViewStudentListBanner() {
@@ -98,6 +101,27 @@ public class StudentQuizGradesView {
 
     public void displayViewStudentAverageQuizScoreBanner() {
         io.print("=== Student Quiz Average Score ===");
+    }
+
+    public void displayViewClassAverageQuizScoreBanner() {
+        io.print("=== Class Average Quiz Score ");
+    }
+
+    public void displayClassAverageQuizScore(Float average) {
+        if (average != null) {
+            io.print("Class average: " + average);
+        } else {
+            io.print("No average");
+        }
+        io.readString("Please hit enter to continue _");
+    }
+
+    public void displayViewHighestScorersBanner() {
+        io.print("=== Highest Scorer(s) ===");
+    }
+
+    public void displayViewLowestScorersBanner() {
+        io.print("=== Lowest Scorer(s) ===");
     }
 
     public void displayUnknownCommand() {

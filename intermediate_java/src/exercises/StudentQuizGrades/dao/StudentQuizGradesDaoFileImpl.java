@@ -64,6 +64,53 @@ public class StudentQuizGradesDaoFileImpl implements StudentQuizGradesDao {
         return null;
     }
 
+    @Override
+    public Float getClassAverageQuizScore() {
+        Float sum = studentList.stream()
+                .map(s -> getAverageQuizScore(s.getName()))
+                .reduce(Float::sum).get();
+        return sum / studentList.size();
+    }
+
+    @Override
+    public List<Student> getHighestScorers() {
+        Integer highestScore = Integer.MIN_VALUE;
+        for (Student student : studentList) {
+            int currHighest = student.getQuizScores()
+                    .stream()
+                    .reduce(Integer::max)
+                    .get();
+
+            if (currHighest > highestScore) {
+                highestScore = currHighest;
+            }
+        }
+
+        Integer finalHighestScore = highestScore;
+        return studentList.stream()
+                .filter(s -> s.getQuizScores().contains(finalHighestScore))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Student> getLowestScorers() {
+        Integer lowestScore = Integer.MAX_VALUE;
+        for (Student student : studentList) {
+            int currLowest = student.getQuizScores()
+                    .stream()
+                    .reduce(Integer::min)
+                    .get();
+            if (currLowest < lowestScore) {
+                lowestScore = currLowest;
+            }
+        }
+
+        Integer finalLowestScore = lowestScore;
+        return studentList.stream()
+                .filter(s -> s.getQuizScores().contains(finalLowestScore))
+                .collect(Collectors.toList());
+    }
+
     private Student unmarshallStudent(String studentAsText) {
         String[] studentTokens = studentAsText.split(DELIMITER);
         List<Integer> quizScores = new ArrayList<>();

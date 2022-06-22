@@ -40,6 +40,15 @@ public class StudentQuizGradesController {
                         viewStudentAverageQuizScore();
                         break;
                     case 6:
+                        viewClassAverageQuizScore();
+                        break;
+                    case 7:
+                        viewHighestScorers();
+                        break;
+                    case 8:
+                        viewLowestScorers();
+                        break;
+                    case 9:
                         keepGoing = false;
                         break;
                     default:
@@ -89,6 +98,24 @@ public class StudentQuizGradesController {
         String name = view.getStudentName();
         Float averageQuizScore = dao.getAverageQuizScore(name);
         view.displayAverageQuizScore(averageQuizScore);
+    }
+
+    private void viewClassAverageQuizScore() {
+        view.displayViewClassAverageQuizScoreBanner();
+        Float classAverageQuizScore = dao.getClassAverageQuizScore();
+        view.displayClassAverageQuizScore(classAverageQuizScore);
+    }
+
+    private void viewHighestScorers() {
+        view.displayViewHighestScorersBanner();
+        List<Student> highestScorers = dao.getHighestScorers();
+        view.displayStudentList(highestScorers);
+    }
+
+    private void viewLowestScorers() {
+        view.displayViewLowestScorersBanner();
+        List<Student> lowestScorers = dao.getLowestScorers();
+        view.displayStudentList(lowestScorers);
     }
 
     private void unknownCommand() {
