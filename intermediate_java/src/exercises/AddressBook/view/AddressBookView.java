@@ -5,7 +5,9 @@ import exercises.AddressBook.dto.Address;
 import io.UserIO;
 import io.UserIOConsoleImpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AddressBookView {
     private UserIO io = new UserIOConsoleImpl();
@@ -21,8 +23,9 @@ public class AddressBookView {
         io.print("3. Find Address");
         io.print("4. List Address Count");
         io.print("5. List All Addresses");
-        io.print("6. Quit");
-        return io.readInt("Please select the operation you wish to perform: ",1, 6);
+        io.print("6. Edit Address");
+        io.print("7. Quit");
+        return io.readInt("Please select the operation you wish to perform: ",1, 7);
     }
 
     public void displayBanner() {
@@ -58,11 +61,11 @@ public class AddressBookView {
     public Address getAddress() {
         String firstName = io.readString("Please Enter First Name: ");
         String lastName = io.readString("Please Enter Last Name: ");
-        String street = io.readString("Please Enter Street Name: ");
+        String streetName = io.readString("Please Enter Street Name: ");
         String town = io.readString("Please Enter Town: ");
         String city = io.readString("Please Enter City: ");
         String zipCode = io.readString("Please Enter Zip Code: ");
-        return new Address(firstName, lastName, street, town, city, zipCode);
+        return new Address(firstName, lastName, streetName, town, city, zipCode);
     }
 
     public String getInput(String prompt) {
@@ -91,6 +94,47 @@ public class AddressBookView {
 
     public void displayAddressCount(int count) {
         displayResultBanner("" + count);
+    }
+
+    public Map<String, String> getEditAddressInfo() {
+        Map<String, String> fieldsToEdit = new HashMap<>();
+
+        String toEditFirstName = io.readYesNo("Edit First Name? ");
+        if (toEditFirstName.equals("y")) {
+            String newFirstName = io.readString("New First Name: ");
+            fieldsToEdit.put("First Name", newFirstName);
+        }
+
+        String toEditLastName = io.readYesNo("Edit Last Name?");
+        if (toEditLastName.equals("y")) {
+            String newLastName = io.readString("New Last Name: ");
+            fieldsToEdit.put("Last Name", newLastName);
+        }
+
+        String toEditStreetName = io.readYesNo("Edit Street Name?");
+        if (toEditStreetName.equals("y")) {
+            String newStreetName = io.readString("New Street Name: ");
+            fieldsToEdit.put("Street Name", newStreetName);
+        }
+
+        String toEditTown = io.readYesNo("Edit Town?");
+        if (toEditTown.equals("y")) {
+            String newTown = io.readString("New Town: ");
+            fieldsToEdit.put("Town", newTown);
+        }
+
+        String toEditCity = io.readYesNo("Edit City?");
+        if (toEditCity.equals("y")) {
+            String newCity = io.readString("New City: ");
+            fieldsToEdit.put("City", newCity);
+        }
+
+        String toEditZipCode = io.readYesNo("Edit Zip Code?");
+        if (toEditZipCode.equals("y")) {
+            String newZipCode = io.readString("New Zip Code: ");
+            fieldsToEdit.put("Zip Code", newZipCode);
+        }
+        return fieldsToEdit;
     }
 
     public void respondToUnknownCommand() {

@@ -6,6 +6,7 @@ import exercises.AddressBook.dto.Address;
 import exercises.AddressBook.view.AddressBookView;
 
 import java.util.List;
+import java.util.Map;
 
 public class AddressBookController {
 //    Orchestrate all activities of the program.
@@ -42,6 +43,9 @@ public class AddressBookController {
                     listAllAddresses();
                     break;
                 case 6:
+                    editAddress();
+                    break;
+                case 7:
                     keepGoing = false;
                     break;
                 default:
@@ -67,7 +71,8 @@ public class AddressBookController {
         List<Address> addressesFound = dao.getAddressByLastName(lastName);
         if (!addressesFound.isEmpty()) {
             int choice = view.getDeleteChoice(addressesFound) - 1;
-            Address addressRemoved = dao.removeAddress(choice);
+            Address addressToDelete = addressesFound.get(choice);
+            Address addressRemoved = dao.removeAddress(addressToDelete);
             if (addressRemoved != null) {
                 view.displayResultBanner(addressRemoved, "deleted");
             }
@@ -100,6 +105,23 @@ public class AddressBookController {
             view.displayAddresses(addresses);
         } else {
             view.displayResultBanner("Address book is empty");
+        }
+    }
+
+    private void editAddress() {
+        view.displayBanner("Edit Address");
+        String lastName = view.getInput("Please enter last name of address to edit: ");
+        List<Address> addressesFound = dao.getAddressByLastName(lastName);
+        if (!addressesFound.isEmpty()) {
+            int choice = view.getDeleteChoice(addressesFound) - 1;
+            Address addressToEdit = addressesFound.get(choice);
+            Map<String, String> fieldsToEdit = view.getEditAddressInfo();
+            Address editedAddress = dao.editAddress(addressToEdit, fieldsToEdit);
+            if (editedAddress != null) {
+                view.displayResultBanner(editedAddress, "edited");
+            }
+        } else {
+            view.displayResultBanner("No addresses found for the given last name");
         }
     }
 

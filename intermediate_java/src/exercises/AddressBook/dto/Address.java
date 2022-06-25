@@ -6,15 +6,15 @@ import java.util.Objects;
 public class Address {
     private String firstName;
     private String lastName;
-    private String street;
+    private String streetName;
     private String town;
     private String city;
     private String zipCode;
 
-    public Address(String firstName, String lastName, String street, String town, String city, String zipCode) {
+    public Address(String firstName, String lastName, String streetName, String town, String city, String zipCode) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.street = street;
+        this.streetName = streetName;
         this.town = town;
         this.city = city;
         this.zipCode = zipCode;
@@ -36,12 +36,12 @@ public class Address {
         this.lastName = lastName;
     }
 
-    public String getStreet() {
-        return street;
+    public String getStreetName() {
+        return streetName;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
     }
 
     public String getTown() {
@@ -71,7 +71,7 @@ public class Address {
     @Override
     public String toString() {
         return firstName + " " + lastName + "\n"
-                + street + "\n"
+                + streetName + "\n"
                 + town + ", " + city + ", " + zipCode + "\n";
     }
 
@@ -80,11 +80,11 @@ public class Address {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return Objects.equals(firstName, address.firstName) && Objects.equals(lastName, address.lastName) && Objects.equals(street, address.street) && Objects.equals(town, address.town) && Objects.equals(city, address.city) && Objects.equals(zipCode, address.zipCode);
+        return Objects.equals(firstName, address.firstName) && Objects.equals(lastName, address.lastName) && Objects.equals(streetName, address.streetName) && Objects.equals(town, address.town) && Objects.equals(city, address.city) && Objects.equals(zipCode, address.zipCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, street, town, city, zipCode);
+        return Objects.hash(firstName, lastName, streetName, town, city, zipCode);
     }
 }

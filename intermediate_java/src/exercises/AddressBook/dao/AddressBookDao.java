@@ -4,6 +4,7 @@ package exercises.AddressBook.dao;
 import exercises.AddressBook.dto.Address;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AddressBookDao {
 //    Add an Address
@@ -13,7 +14,8 @@ public interface AddressBookDao {
 //    Return all of the Addresses in the AddressBookDao
 
     Address addAddress(Address address);
-    Address removeAddress(int index);
+    Address removeAddress(Address address);
+    Address editAddress(Address address, Map<String, String> fieldsToEdit);
     List<Address> getAddressByLastName(String lastName);
     int getAddressCount();
     List<Address> getAllAddresses();
