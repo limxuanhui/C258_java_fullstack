@@ -1,6 +1,7 @@
 package io;
 /* Created by limxuanhui on 21/6/22 */
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class UserIOConsoleImpl implements UserIO {
@@ -155,5 +156,24 @@ public class UserIOConsoleImpl implements UserIO {
             }
         } while (!isValid);
         return -1;
+    }
+
+    @Override
+    public String readYesNo(String prompt) {
+        boolean isValid = false;
+        do {
+            System.out.println(prompt + " (y or n)");
+            try {
+                String result = scanner.nextLine().toLowerCase(Locale.ROOT);
+                if (!result.equals("y") && !result.equals("n")) {
+                    System.out.println("Invalid input, please try again");
+                    continue;
+                }
+                return result;
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!isValid);
+        return null;
     }
 }
