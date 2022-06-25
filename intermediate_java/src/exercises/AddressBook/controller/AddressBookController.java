@@ -2,6 +2,7 @@ package exercises.AddressBook.controller;
 /* Created by limxuanhui on 23/6/22 */
 
 import exercises.AddressBook.dao.AddressBookDao;
+import exercises.AddressBook.dao.AddressBookDaoException;
 import exercises.AddressBook.dto.Address;
 import exercises.AddressBook.view.AddressBookView;
 
@@ -13,8 +14,8 @@ public class AddressBookController {
 //    Use the View and UserIOClass from a previous lab to handle all console input and output
 //    Use the AddressBookDao class to store Address objects
 
-    private AddressBookDao dao;
-    private AddressBookView view;
+    private final AddressBookDao dao;
+    private final AddressBookView view;
 
     public AddressBookController(AddressBookDao dao, AddressBookView view) {
         this.dao = dao;
@@ -22,50 +23,55 @@ public class AddressBookController {
     }
 
     public void run() {
-        System.out.println("Running");
+        int choice;
         boolean keepGoing = true;
-        while (keepGoing) {
-            int choice = getUserMenuSelection();
-            switch (choice) {
-                case 1:
-                    addAddress();
-                    break;
-                case 2:
-                    deleteAddress();
-                    break;
-                case 3:
-                    findAddress();
-                    break;
-                case 4:
-                    listAddressCount();
-                    break;
-                case 5:
-                    listAllAddresses();
-                    break;
-                case 6:
-                    editAddress();
-                    break;
-                case 7:
-                    keepGoing = false;
-                    break;
-                default:
-                    unknownCommand();
+        try {
+            while (keepGoing) {
+                choice = getUserMenuSelection();
+                switch (choice) {
+                    case 1:
+                        addAddress();
+                        break;
+                    case 2:
+                        deleteAddress();
+                        break;
+                    case 3:
+                        findAddress();
+                        break;
+                    case 4:
+                        listAddressCount();
+                        break;
+                    case 5:
+                        listAllAddresses();
+                        break;
+                    case 6:
+                        editAddress();
+                        break;
+                    case 7:
+                        keepGoing = false;
+                        break;
+                    default:
+                        unknownCommand();
+                }
             }
+            exitCommand();
+        } catch (AddressBookDaoException e) {
+            view.displayResultBanner(e.getMessage());
         }
-        exitCommand();
+
     }
 
     private int getUserMenuSelection() {
         return view.getMenuSelection();
     }
 
-    private void addAddress() {
+    private void addAddress() throws AddressBookDaoException {
         view.displayBanner("Add Address");
         Address addressAdded = dao.addAddress(view.getAddress());
         view.displayResultBanner(addressAdded, "added");
     }
 
-    private void deleteAddress() {
+    private void deleteAddress() throws AddressBookDaoException {
         view.displayBanner("Delete Address");
         String lastName = view.getInput("Please enter last name of address to delete: ");
         List<Address> addressesFound = dao.getAddressByLastName(lastName);
@@ -108,7 +114,7 @@ public class AddressBookController {
         }
     }
 
-    private void editAddress() {
+    private void editAddress() throws AddressBookDaoException {
         view.displayBanner("Edit Address");
         String lastName = view.getInput("Please enter last name of address to edit: ");
         List<Address> addressesFound = dao.getAddressByLastName(lastName);

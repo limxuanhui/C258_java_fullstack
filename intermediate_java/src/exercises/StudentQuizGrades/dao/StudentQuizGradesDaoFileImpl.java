@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class StudentQuizGradesDaoFileImpl implements StudentQuizGradesDao {
     private final String DELIMITER = ",";
     private final String STUDENT_QUIZ_GRADES_FILE = "src/exercises/StudentQuizGrades/student_quiz_grades.txt";
-    private List<Student> studentList = new ArrayList<>();
+    private final List<Student> studentList = new ArrayList<>();
 
     @Override
     public List<Student> getStudentList() throws StudentQuizGradesDaoException {

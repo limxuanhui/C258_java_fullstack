@@ -13,9 +13,9 @@ public interface AddressBookDao {
 //    Return a count of Addresses in the AddressBookDao
 //    Return all of the Addresses in the AddressBookDao
 
-    Address addAddress(Address address);
-    Address removeAddress(Address address);
-    Address editAddress(Address address, Map<String, String> fieldsToEdit);
+    Address addAddress(Address address) throws AddressBookDaoException;
+    Address removeAddress(Address address) throws AddressBookDaoException;
+    Address editAddress(Address address, Map<String, String> fieldsToEdit) throws AddressBookDaoException;
     List<Address> getAddressByLastName(String lastName);
     int getAddressCount();
     List<Address> getAllAddresses();
