@@ -1,0 +1,14 @@
+CREATE DATABASE books;
+
+USE books;
+DROP TABLE book;
+
+SHOW TABLES;
+CREATE TABLE BOOK(
+	bookId INT NOT NULL,
+    bookTitle VARCHAR(100) NOT NULL,
+    origPubDate YEAR,
+    CONSTRAINT PK_book PRIMARY KEY (bookId)
+);
+
+DESCRIBE BOOK;
