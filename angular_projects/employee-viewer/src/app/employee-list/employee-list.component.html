@@ -1,0 +1,12 @@
+<ul class="list-group">
+  <li
+    class="list-group-item mx-5"
+    *ngFor="let employee of employees"
+    (click)="onSelect(employee)"
+  >
+    <span class="badge bg-primary mx-1">{{ employee.employeeId }}</span>
+    <span class="badge bg-secondary mx-1"
+      >{{ employee.firstName }} {{ employee.lastName }}</span
+    >
+  </li>
+</ul>

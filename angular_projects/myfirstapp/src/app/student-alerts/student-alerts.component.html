@@ -1,0 +1,6 @@
+<div *ngIf="student">
+  <div *ngFor="let subject of student.subjects">
+    <span>{{ subject.subject }} : {{ subject.score }}</span>
+  </div>
+  <button (click)="calculateGrade(student.subjects)">Calculate grade</button>
+</div>

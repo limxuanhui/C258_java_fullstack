@@ -1,0 +1,13 @@
+<h1>Welcome to {{ title }}</h1>
+<div
+  *ngFor="let student of students"
+>
+  <p>
+    {{ student.id }} :
+    <a [title]="student.name + ' is the best'">{{ student.name }}</a>
+  </p>
+  <p>Contact: {{ student.contact }}</p>
+  <p>{{ student.intro }}</p>
+  <app-student-alerts [student]="student" (notify)="onNotify($event)"></app-student-alerts>
+  <hr />
+</div>
