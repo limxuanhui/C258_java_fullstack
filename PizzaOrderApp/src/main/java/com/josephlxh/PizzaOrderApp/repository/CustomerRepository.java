@@ -1,4 +1,4 @@
-package com.josephlxh.PizzaOrderApp;
+package com.josephlxh.PizzaOrderApp.repository;
 /* Created by limxuanhui on 30/6/22 */
 
 import com.josephlxh.PizzaOrderApp.dto.Customer;

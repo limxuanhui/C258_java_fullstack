@@ -1,18 +1,18 @@
 package com.josephlxh.PizzaOrderApp.controller;
 /* Created by limxuanhui on 30/6/22 */
 
-import com.josephlxh.PizzaOrderApp.PizzaPorderRepository;
+import com.josephlxh.PizzaOrderApp.repository.PorderRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/order")
-public class PizzaPorderController {
+public class PorderController {
 
-    private PizzaPorderRepository pizzaPorderRepository;
+    private PorderRepository porderRepository;
 
-    public PizzaPorderController(PizzaPorderRepository pizzaPorderRepository) {
-        this.pizzaPorderRepository = pizzaPorderRepository;
+    public PorderController(PorderRepository porderRepository) {
+        this.porderRepository = porderRepository;
     }
 
 

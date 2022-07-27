@@ -9,6 +9,8 @@ public interface UserIO {
 
     int readInt(String prompt);
 
+    int readInt(String prompt, int min);
+
     int readInt(String prompt, int min, int max);
 
     double readDouble(String prompt);

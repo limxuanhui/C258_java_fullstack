@@ -34,6 +34,26 @@ public class UserIOConsoleImpl implements UserIO {
     }
 
     @Override
+    public int readInt(String prompt, int min) {
+        boolean isValid = false;
+        do {
+            System.out.println(prompt + "minimum " + min);
+            try {
+                String numString = scanner.nextLine();
+                int num = Integer.parseInt(numString);
+                if (num < min) {
+                    System.out.println("Invalid input, please try again");
+                    continue;
+                }
+                return num;
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!isValid);
+        return -1;
+    }
+
+    @Override
     public int readInt(String prompt, int min, int max) {
         boolean isValid = false;
         do {
